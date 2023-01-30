@@ -151,17 +151,38 @@ if st.button("Click here"):
 st.write("## Vote for Proposal 1")
 
 if st.button("Vote Proposal 1"):
-    tx_hash = contract_token.functions.transfer(contract_address_1, 1).transact({'from': address, 'gas': 1000000})
+    try:
+        tx_hash = contract_token.functions.transfer(contract_address_1, 1).transact({'from': address, 'gas': 1000000})
+
+    except ValueError as error:
+        if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
+            st.write("You do not have the power to vote!")
+        else:
+            raise error
 
 st.write("## Vote for Proposal 2")
 
 if st.button("Vote Proposal 2"):
-    tx_hash = contract_token.functions.transfer(contract_address_2, 1).transact({'from': address, 'gas': 1000000})
+    try:
+        tx_hash = contract_token.functions.transfer(contract_address_2, 1).transact({'from': address, 'gas': 1000000})
+
+    except ValueError as error:
+        if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
+            st.write("You do not have the power to vote!")
+        else:
+            raise error
 
 st.write("## Vote for Proposal 3")
 
 if st.button("Vote Proposal 3"):
-    tx_hash = contract_token.functions.transfer(contract_address_3, 1).transact({'from': address, 'gas': 1000000})
+    try: 
+        tx_hash = contract_token.functions.transfer(contract_address_3, 1).transact({'from': address, 'gas': 1000000})
+
+    except ValueError as error:
+        if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
+            st.write("You do not have the power to vote!")
+        else:
+            raise error
 
 st.title("See Vote Tally")
 
