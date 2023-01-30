@@ -1,23 +1,5 @@
 [
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_sender",
-				"type": "address"
-			},
-			{
-				"name": "_content",
-				"type": "string"
-			}
-		],
-		"name": "makeProposal",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -29,10 +11,12 @@
 		"name": "getInfo",
 		"outputs": [
 			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			},
 			{
+				"internalType": "string",
 				"name": "",
 				"type": "string"
 			}
@@ -42,15 +26,37 @@
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_sender",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_content",
+				"type": "string"
+			}
+		],
+		"name": "makeProposal",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [],
 		"name": "proposal",
 		"outputs": [
 			{
+				"internalType": "address",
 				"name": "sender",
 				"type": "address"
 			},
 			{
+				"internalType": "string",
 				"name": "content",
 				"type": "string"
 			}
