@@ -4,6 +4,7 @@ from web3 import Web3
 from pathlib import Path
 from dotenv import load_dotenv
 import streamlit as st
+import time
 
 load_dotenv()
 
@@ -118,7 +119,7 @@ def load_contract_3():
 contract_3 = load_contract_3()
 
 
-### Addresses for Voting
+### Contract addresses to cast votes to
 
 contract_address_1 = os.getenv("SMART_CONTRACT_ADDRESS_1")
 
@@ -131,28 +132,35 @@ contract_address_3 = os.getenv("SMART_CONTRACT_ADDRESS_3")
 ################################################################################
 
 st.title("Voting System")
-st.write("Choose an account to get started")
 accounts = w3.eth.accounts
-address = st.selectbox("Select Account", options=accounts)
+address = st.selectbox("Select your Account", options=accounts)
+
+## Check balance of voting token for selected address
+
+token_balance = contract_token.functions.balanceOf(address).call()
+st.write("##### Token Balance:", token_balance)
 st.markdown("---")
 
 ### See all proposals
 
-st.title("See all Proposals")
+st.title("Proposals")
 
-if st.button("Click here"):
-    result_1 = contract_1.functions.getInfo().call()
-    st.write("#### Proposal 1: ", result_1[1])
-    result_2 = contract_2.functions.getInfo().call()
-    st.write("#### Proposal 2: ", result_2[1])
-    result_3 = contract_3.functions.getInfo().call()
-    st.write("#### Proposal 3: ", result_3[1])
+result_1 = contract_1.functions.getInfo().call()
+st.write("#### Proposal 1: ", result_1[1])
+result_2 = contract_2.functions.getInfo().call()
+st.write("#### Proposal 2: ", result_2[1])
+result_3 = contract_3.functions.getInfo().call()
+st.write("#### Proposal 3: ", result_3[1])
+st.markdown("---")
+
+### Vote for proposal
 
 st.write("## Vote for Proposal 1")
 
 if st.button("Vote Proposal 1"):
     try:
         tx_hash = contract_token.functions.transfer(contract_address_1, 1).transact({'from': address, 'gas': 1000000})
+        st.write("You've succesfully voted!")
 
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
@@ -165,6 +173,7 @@ st.write("## Vote for Proposal 2")
 if st.button("Vote Proposal 2"):
     try:
         tx_hash = contract_token.functions.transfer(contract_address_2, 1).transact({'from': address, 'gas': 1000000})
+        st.write("You've succesfully voted!")
 
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
@@ -177,22 +186,25 @@ st.write("## Vote for Proposal 3")
 if st.button("Vote Proposal 3"):
     try: 
         tx_hash = contract_token.functions.transfer(contract_address_3, 1).transact({'from': address, 'gas': 1000000})
-
+        st.write("You've succesfully voted!")
+        
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
             st.write("You do not have the power to vote!")
         else:
             raise error
 
-st.title("See Vote Tally")
+### Vote Tally
 
-if st.button("Vote Tally"):
-    result_proposal_1 = contract_token.functions.balanceOf(contract_address_1).call()
-    st.write("#### Proposal 1: ", result_proposal_1)
-    result_proposal_2 = contract_token.functions.balanceOf(contract_address_2).call()
-    st.write("#### Proposal 2: ",  result_proposal_2)
-    result_proposal_3 = contract_token.functions.balanceOf(contract_address_3).call()
-    st.write("#### Proposal 3: ", result_proposal_3)
+st.markdown("---")
+st.title("Vote Tally")
+
+result_proposal_1 = contract_token.functions.balanceOf(contract_address_1).call()
+st.write("#### Proposal 1: ", result_proposal_1)
+result_proposal_2 = contract_token.functions.balanceOf(contract_address_2).call()
+st.write("#### Proposal 2: ",  result_proposal_2)
+result_proposal_3 = contract_token.functions.balanceOf(contract_address_3).call()
+st.write("#### Proposal 3: ", result_proposal_3)
 
 
 
