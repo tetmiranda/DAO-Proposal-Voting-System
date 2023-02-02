@@ -108,9 +108,9 @@ proposal_1 = st.text_input("Enter the first proposal")
 if st.button("Register Proposal 1"):
     tx_hash = contract_1.functions.makeProposal(address, proposal_1).transact({'from': address, 'gas': 1000000})
 
-if st.button("See Proposal 1"):
-    result = contract_1.functions.getInfo().call()
-    st.write("#### Proposal 1: ", result[1])
+if proposal_1:
+    st.write("Proposal 1: " + proposal_1)
+
 
 ### Proposal 2
 
@@ -119,10 +119,9 @@ proposal_2 = st.text_input("Enter the second proposal")
 
 if st.button("Register Proposal 2"):
     tx_hash = contract_2.functions.makeProposal(address, proposal_2).transact({'from': address, 'gas': 1000000})
-
-if st.button("See Proposal 2"):
-    result = contract_2.functions.getInfo().call()
-    st.write("#### Proposal 2: ", result[1])
+    
+if proposal_2:   
+    st.write("Proposal 2: " + proposal_2)
 
 ### Proposal 3
 
@@ -131,10 +130,10 @@ proposal_3 = st.text_input("Enter the third proposal")
 
 if st.button("Register Proposal 3"):
     tx_hash = contract_3.functions.makeProposal(address, proposal_3).transact({'from': address, 'gas': 1000000})
+    
+if proposal_3:   
+    st.write("Proposal 3: " + proposal_3)
 
-if st.button("See Proposal 3"):
-    result = contract_3.functions.getInfo().call()
-    st.write("#### Proposal 3: ", result[1])
 
 ### See all proposals
 

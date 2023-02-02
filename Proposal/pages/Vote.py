@@ -153,14 +153,24 @@ result_3 = contract_3.functions.getInfo().call()
 st.write("#### Proposal 3: ", result_3[1])
 st.markdown("---")
 
+
 ### Vote for proposal
 
-st.write("## Vote for Proposal 1")
+st.title("Vote")
+
+vote_power = st.text_input("Enter the amount of tokens you wish to vote with:", value = "0")
+try:
+    vote_power = float(vote_power)
+    vote_power = int(round(vote_power))
+except ValueError:
+    st.write("Invalid input. Please enter a number.")
+
+st.markdown("---")
 
 if st.button("Vote Proposal 1"):
     try:
-        tx_hash = contract_token.functions.transfer(contract_address_1, 1).transact({'from': address, 'gas': 1000000})
-        st.write("You've succesfully voted!")
+        tx_hash = contract_token.functions.transfer(contract_address_1, vote_power).transact({'from': address, 'gas': 1000000})
+        st.write("You've succesfully voted for Proposal 1 with " + str(vote_power) + " Vote tokens.")
 
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
@@ -168,7 +178,6 @@ if st.button("Vote Proposal 1"):
         else:
             raise error
 
-st.write("## Vote for Proposal 2")
 
 if st.button("Vote Proposal 2"):
     try:
@@ -177,16 +186,15 @@ if st.button("Vote Proposal 2"):
 
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
-            st.write("You do not have the power to vote!")
+            st.write("You've succesfully voted for Proposal 2 with " + str(vote_power) + " Vote tokens.")
         else:
             raise error
 
-st.write("## Vote for Proposal 3")
 
 if st.button("Vote Proposal 3"):
     try: 
         tx_hash = contract_token.functions.transfer(contract_address_3, 1).transact({'from': address, 'gas': 1000000})
-        st.write("You've succesfully voted!")
+        st.write("You've succesfully voted for Proposal 3 with " + str(vote_power) + " Vote tokens.")
         
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
