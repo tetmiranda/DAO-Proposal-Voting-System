@@ -22,17 +22,21 @@ This project aims to create an DAO application on the blockchain that allows use
 
 The project will consist of minting new tokens on the Ethereum network, which will then be distributed to eligible candidates. These new tokens will be used for voting on proposals put forth by other eligible users by coin holders depositing their tokens into a polling wallet.
 
-Distribute erc20 token “VoteCoin” to eligible users - 1 token = 1 vote (only whole numbers of tokens can be sent - set decimals to 0)
-Setup proposal contract, whereby the contract deployer can make one proposal per contract that represents what you are voting on (can be seen via GetInfo() call) e.g. 3 addresses for 3 different devs to potentially hire (Streamlit frontend shows which address represents who) - store extended details of proposal on IPFS.
-Voters send their token to who they want to vote for (tokens are restricted to being sent to the eligible addresses ie can’t be sent to random addresses.)
-Check total supply of each address
+* Distribute ERC20 token “VoteCoin” to eligible users: 1 token = 1 vote (only whole numbers of tokens can be sent - set decimals to 0)
+* Setup proposal contract, whereby the contract deployer can make one proposal per contract that represents what you are voting on (can be seen via GetInfo() call) e.g. 3 addresses for 3 different devs to potentially hire (Streamlit frontend shows which address represents who) - store extended details of proposal on IPFS.
+
+* Voters send their token to who they want to vote for (tokens are restricted to being sent to the eligible addresses ie can’t be sent to random addresses.)
+* Check total supply of each address
 Highest total supply of token in address wins.
 
 
-### Languages / Tools Used:
+### Languages / Tools / Resources Used:
 
-* Solidity for smart contracts
-* VS Code for streamlit
+* Smart Contracts: Solidity using Remix IDE
+* ABI (Application Binary Interface) file in JSON format
+* Metamask: store (vote) tokens, interact with decentralized application
+* Pinata to store Smart Contracts events and capture the total votes
+* VS Code for Python for Streamlit front-end
 
 
 ### Streamlit Frontend:
