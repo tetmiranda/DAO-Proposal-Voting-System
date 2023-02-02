@@ -58,9 +58,20 @@ amount = st.text_input("Enter the amount of VOTE tokens you would like to mint:"
 amount = int(amount)
 
 if st.button("Mint tokens"):
-    tx_hash = contract_token.functions.mint(addresses, amount).transact({'from': address, 'gas': 1000000})
+    tx_hash = contract_token.functions.mint(single_address, amount).transact({'from': address, 'gas': 1000000})
     st.write("You've successfully minted " + str(amount) + " VOTE tokens.")
 
 st.markdown("---")
 
 st.title("Multiple Address Minting")
+
+addresses_input = st.text_input("Enter the addresses you wish to mint the tokens to (separated by a comma):")
+recipients = [address.strip() for address in addresses_input.split(',')]
+
+amount_multiple = st.text_input("Enter the amount of VOTE tokens you would like to mint to each address:", value='0')
+amount_multiple = int(amount_multiple)
+
+if st.button("Mint token(s)"):
+    tx_hash = contract_token.functions.mintToMultiple(recipients, amount_multiple).transact({'from': address, 'gas': 1000000})
+    st.write("You've successfully minted " + str(amount_multiple) + " VOTE tokens to the following addresses: " + str(recipients))
+
