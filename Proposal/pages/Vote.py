@@ -182,11 +182,11 @@ if st.button("Vote Proposal 1"):
 if st.button("Vote Proposal 2"):
     try:
         tx_hash = contract_token.functions.transfer(contract_address_2, 1).transact({'from': address, 'gas': 1000000})
-        st.write("You've succesfully voted!")
+        st.write("You've succesfully voted for Proposal 2 with " + str(vote_power) + " Vote tokens.")
 
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
-            st.write("You've succesfully voted for Proposal 2 with " + str(vote_power) + " Vote tokens.")
+            st.write("You do not have the power to vote!")
         else:
             raise error
 
