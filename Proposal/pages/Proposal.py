@@ -4,8 +4,35 @@ from web3 import Web3
 from pathlib import Path
 from dotenv import load_dotenv
 import streamlit as st
+import base64
+from PIL import Image
+from streamlit.components.v1 import html
 
 load_dotenv()
+
+################################################################################
+# Function adding background to the streamlit page
+################################################################################
+
+def add_bg_from_local(image_file):
+    with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+    st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
+        background-size: cover
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+add_bg_from_local('background.jpg')
+
+
+image = Image.open('proposal.png')
+st.image(image, caption='# ') 
 
 # Define and connect a new Web3 provider
 w3 = Web3(Web3.HTTPProvider(os.getenv("WEB3_PROVIDER_URI")))
@@ -106,10 +133,15 @@ st.title("Register Proposal 1")
 proposal_1 = st.text_input("Enter the first proposal")
 
 if st.button("Register Proposal 1"):
-    tx_hash = contract_1.functions.makeProposal(address, proposal_1).transact({'from': address, 'gas': 1000000})
+    try:
+        tx_hash = contract_1.functions.makeProposal(address, proposal_1).transact({'from': address, 'gas': 1000000})
 
-if proposal_1:
-    st.write("Proposal 1: " + proposal_1)
+    except ValueError as error:
+        if 'message' in error.args[0] and 'revert Only the contract owner can make a proposal' in error.args[0]['message']:
+            st.write("You are not permitted to make a proposal.")
+    else:
+        if proposal_1:
+             st.write("Proposal 1: " + proposal_1)
 
 
 ### Proposal 2
@@ -118,10 +150,15 @@ st.title("Register Proposal 2")
 proposal_2 = st.text_input("Enter the second proposal")
 
 if st.button("Register Proposal 2"):
-    tx_hash = contract_2.functions.makeProposal(address, proposal_2).transact({'from': address, 'gas': 1000000})
+    try: 
+        tx_hash = contract_2.functions.makeProposal(address, proposal_2).transact({'from': address, 'gas': 1000000})
     
-if proposal_2:   
-    st.write("Proposal 2: " + proposal_2)
+    except ValueError as error:
+        if 'message' in error.args[0] and 'revert Only the contract owner can make a proposal' in error.args[0]['message']:
+            st.write("You are not permitted to make a proposal.")
+    else:
+        if proposal_2:
+             st.write("Proposal 2: " + proposal_2)
 
 ### Proposal 3
 
@@ -129,10 +166,15 @@ st.title("Register Proposal 3")
 proposal_3 = st.text_input("Enter the third proposal")
 
 if st.button("Register Proposal 3"):
-    tx_hash = contract_3.functions.makeProposal(address, proposal_3).transact({'from': address, 'gas': 1000000})
+    try: 
+        tx_hash = contract_3.functions.makeProposal(address, proposal_3).transact({'from': address, 'gas': 1000000})
     
-if proposal_3:   
-    st.write("Proposal 3: " + proposal_3)
+    except ValueError as error:
+        if 'message' in error.args[0] and 'revert Only the contract owner can make a proposal' in error.args[0]['message']:
+            st.write("You are not permitted to make a proposal.")
+    else:
+        if proposal_3:
+             st.write("Proposal 3: " + proposal_3)
 
 
 ### See all proposals
@@ -146,3 +188,4 @@ if st.button("Click here"):
     st.write("#### Proposal 2: ", result_2[1])
     result_3 = contract_3.functions.getInfo().call()
     st.write("#### Proposal 3: ", result_3[1])
+

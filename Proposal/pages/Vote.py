@@ -4,9 +4,38 @@ from web3 import Web3
 from pathlib import Path
 from dotenv import load_dotenv
 import streamlit as st
-import time
+import base64
+from PIL import Image
+from streamlit.components.v1 import html
 
 load_dotenv()
+
+################################################################################
+# Function adding background to the streamlit page
+################################################################################
+
+def add_bg_from_local(image_file):
+    with open(image_file, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read())
+    st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url(data:image/{"png"};base64,{encoded_string.decode()});
+        background-size: cover
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+add_bg_from_local('background.jpg')
+
+
+image = Image.open('vote.jpg')
+st.image(image, caption='# ') 
+
+
+
 
 # Define and connect a new Web3 provider
 w3 = Web3(Web3.HTTPProvider(os.getenv("WEB3_PROVIDER_URI")))
@@ -141,6 +170,8 @@ token_balance = contract_token.functions.balanceOf(address).call()
 st.write("##### Token Balance:", token_balance)
 st.markdown("---")
 
+
+
 ### See all proposals
 
 st.title("Proposals")
@@ -165,40 +196,54 @@ try:
 except ValueError:
     st.write("Invalid input. Please enter a number.")
 
-st.markdown("---")
+st.markdown(" ")
 
-if st.button("Vote Proposal 1"):
+
+
+if st.button("Vote for Proposal 1"):
     try:
         tx_hash = contract_token.functions.transfer(contract_address_1, vote_power).transact({'from': address, 'gas': 1000000})
-        st.write("You've succesfully voted for Proposal 1 with " + str(vote_power) + " Vote tokens.")
-
+        st.write("You've succesfully voted for Proposal 1 with " + str(vote_power) + " Vote token(s).")
+        token_balance_1 = contract_token.functions.balanceOf(address).call()
+        st.write("###### Remaining token balance:", token_balance_1)
+    
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
             st.write("You do not have the power to vote!")
+            token_balance_1 = contract_token.functions.balanceOf(address).call()
+            st.write("###### Remaining token balance:", token_balance_1)
         else:
             raise error
 
 
-if st.button("Vote Proposal 2"):
+if st.button("Vote for Proposal 2"):
     try:
-        tx_hash = contract_token.functions.transfer(contract_address_2, 1).transact({'from': address, 'gas': 1000000})
-        st.write("You've succesfully voted for Proposal 2 with " + str(vote_power) + " Vote tokens.")
+        tx_hash = contract_token.functions.transfer(contract_address_2, vote_power).transact({'from': address, 'gas': 1000000})
+        st.write("You've succesfully voted for Proposal 2 with " + str(vote_power) + " Vote token(s).")
+        token_balance_2 = contract_token.functions.balanceOf(address).call()
+        st.write("###### Remaining token balance:", token_balance_2)
 
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
             st.write("You do not have the power to vote!")
+            token_balance_2 = contract_token.functions.balanceOf(address).call()
+            st.write("###### Remaining token balance:", token_balance_2)
         else:
             raise error
 
 
-if st.button("Vote Proposal 3"):
+if st.button("Vote for Proposal 3"):
     try: 
-        tx_hash = contract_token.functions.transfer(contract_address_3, 1).transact({'from': address, 'gas': 1000000})
+        tx_hash = contract_token.functions.transfer(contract_address_3, vote_power).transact({'from': address, 'gas': 1000000})
         st.write("You've succesfully voted for Proposal 3 with " + str(vote_power) + " Vote tokens.")
-        
+        token_balance_3 = contract_token.functions.balanceOf(address).call()
+        st.write("###### Remaining token balance:", token_balance_3)   
+
     except ValueError as error:
         if 'message' in error.args[0] and 'revert ERC20: transfer amount exceeds balance' in error.args[0]['message']:
             st.write("You do not have the power to vote!")
+            token_balance_3 = contract_token.functions.balanceOf(address).call()
+            st.write("###### Remaining token balance:", token_balance_3)
         else:
             raise error
 
