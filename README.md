@@ -72,18 +72,21 @@ Now you can mint tokens, create proposals onchain and vote for the proposals you
 ## Demonstration
 
 ### Token Minting
+------
 
 ![token_minting](Images/Token.gif)
 
 Here is an overview of the token minting process. Only the smart contract deployer of Token.sol has control over the minting process and is able to mint to a single or multiple addresses in one transaction (via the mint() or mintToMultiple() functions respectively). If minting is successful, there will be a confirmation of the amount of tokens minted and to which addresses they were sent to.
 
 ### Creating Proposals
+------
 
 ![creating_proposals](Images/Proposal.gif)
 
 Similarly, the proposal registry system can only be controlled by the smart contract deployer, and in our example we use the same address as the Token Deployer. Select the account that deployed the Proposal.sol smart contract. Now you are able to create three different proposals which are stored onchain via the makeProposal() function and are called back to the streamlit interface via the GetInfo() call function.
 
 ### Voting
+------
 
 ![voting](Images/Vote.gif)
 
