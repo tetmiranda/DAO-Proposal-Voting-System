@@ -37,16 +37,15 @@ The project will consist of minting new tokens on the Ethereum network, which wi
   * Basic functionality: 1 token = 1 vote (only whole numbers of tokens can be sent - set decimals to 0)
   * Added features: Able to send multiple tokens to vote on selected proposal
 * Check total supply of each address
-Highest total supply of token in address wins.
+Highest total supply of token in one of the proposal smart contracts wins.
 
 
 ### Languages / Tools / Resources Used:
 
 * Smart Contracts: Solidity using Remix IDE
 * ABI (Application Binary Interface) file in JSON format
-* Metamask: store (vote) tokens, interact with decentralized application
-* Pinata to store Smart Contracts events and capture the total votes
-* VS Code for Python for Streamlit front-end
+* Metamask: interact with decentralized application
+* VS Code for Streamlit front-end
 
 
 ### Streamlit Frontend:
@@ -60,8 +59,14 @@ We will be using Streamlit for our frontend to create a simpler and more profess
 * Vote tally, everytime a vote is cast it automatically updates.
 
 
-Steps to run Onchain Voting.
-1. Create accounts in Metamask
+### Steps to run Onchain Voting
+
+1. Create accounts in Metamask using Ganache. 
+2. Deploy Token.sol and three Proposal.sol smart contracts through Remix (recommended to use one address for all deployment).
+3. Setup .env file with newly created smart contract addresses.
+4. Run streamlit interface.
+
+Now you can mint tokens, create proposals onchain and vote for the proposals you like.
 
 
 ## Demonstration
@@ -70,7 +75,23 @@ Steps to run Onchain Voting.
 
 ![token_minting](Images/Token.gif)
 
-Here is an overview of the token minting process. Only the smart contract deployer has control over the minting process and is able to mint to a single or multiple addresses in one transaction.
+Here is an overview of the token minting process. Only the smart contract deployer of Token.sol has control over the minting process and is able to mint to a single or multiple addresses in one transaction (via the mint() or mintToMultiple() functions respectively). If minting is successful, there will be a confirmation of the amount of tokens minted and to which addresses they were sent to.
+
+### Creating Proposals
+
+![creating_proposals](Images/Proposal.gif)
+
+Similarly, the proposal registry system can only be controlled by the smart contract deployer, and in our example we use the same address as the Token Deployer. Select the account that deployed the Proposal.sol smart contract. Now you are able to create three different proposals which are stored onchain via the makeProposal() function and are called back to the streamlit interface via the GetInfo() call function.
+
+### Voting
+
+![voting](Images/Vote.gif)
+
+We have finally come up to the most exciting part, its time to vote! As shown above, the proposals are displayed again via the GetInfo() call function and the current vote tally is 0. This tally is obtained by calling the BalanceOf() call function of each smart contract which shows how many tokens have accumalated in each proposal contract. We can then select the accounts that hold tokens and vote with them. Input the desired amount of tokens you wish to vote with and click Vote for Proposal X. This then transfers the desired amount of tokens from the selected address to the selected Proposal contract via the transfer() function. The tally is then automatically updated with the new balances of tokens in each proposal contract.
+
+
+
+
 
 
 
