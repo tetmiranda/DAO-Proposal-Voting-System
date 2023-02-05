@@ -66,7 +66,11 @@ Steps to run Onchain Voting.
 
 ## Demonstration
 
+### Token Minting
+
 ![token_minting](Images/Token.gif)
+
+Here is an overview of the token minting process. Only the smart contract deployer has control over the minting process and is able to mint to a single or multiple addresses in one transaction.
 
 
 
