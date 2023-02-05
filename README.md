@@ -53,15 +53,12 @@ Highest total supply of token in address wins.
 
 We will be using Streamlit for our frontend to create a simpler and more professional interface that anyone of any skill level will be able to interact with.
 
-* Candidate profiles
-* Sending wallet address
-* Checking if they have 1 VOTE token
-* Receiving wallet address
-* Vote tally, everytime a vote is cast - st.cache
+* Proposals
+* Selecting wallet
+* Checking if how many vote tokens the address holds
+* Receiving wallet address (smart contract where proposals are held)
+* Vote tally, everytime a vote is cast it automatically updates.
 
-Credits:
-
-* We used a few other contracts and coding to help put together this contract
 
 Steps to run Onchain Voting.
 1. Create accounts in Metamask
