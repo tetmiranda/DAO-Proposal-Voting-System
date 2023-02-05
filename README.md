@@ -64,3 +64,10 @@ Steps to run Onchain Voting.
 1. Create accounts in Metamask
 
 
+## Demonstration
+
+![token_minting](Images/token.gif)
+
+
+
+
