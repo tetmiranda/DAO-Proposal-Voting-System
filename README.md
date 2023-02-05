@@ -66,7 +66,7 @@ Steps to run Onchain Voting.
 
 ## Demonstration
 
-![token_minting](Images/token.gif)
+![token_minting](Images/Token.gif)
 
 
 
