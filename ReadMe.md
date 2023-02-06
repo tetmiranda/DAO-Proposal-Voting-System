@@ -88,6 +88,13 @@ Similarly, the proposal registry system can only be controlled by the smart cont
 We have finally come up to the most exciting part, its time to vote! As shown above, the proposals are displayed again via the GetInfo() call function and the current vote tally is 0. This tally is obtained by calling the BalanceOf() call function of each smart contract which shows how many tokens have accumalated in each proposal contract. We can then select the accounts that hold tokens and vote with them. Input the desired amount of tokens you wish to vote with and click Vote for Proposal X. This then transfers the desired amount of tokens from the selected address to the selected Proposal contract via the transfer() function. The tally is then automatically updated with the new balances of tokens in each proposal contract.
 
 
+### Future steps for improvement 
+
+* To enhance our voting application, various functional methods and scenarios can be implemented.
+* The voter registration function can be updated to align with the organization's structure and requirements. For instance, if an application is used for  shareholders voting, the weight of a vote can be adjusted based on the voter's stake in the company. 
+* The user interface can be improved with increased functionality and more robust security measures. 
+* A minimum threshold for decision approval and time-limited voting can also be added as useful features. 
+* Utilizing IPFS to present proposals can provide a more comprehensive representation of vote proposals. 
 
 
 ### Languages / Tools / Resources Used:
