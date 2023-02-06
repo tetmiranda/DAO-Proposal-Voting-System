@@ -56,8 +56,8 @@ We will be using Streamlit for our frontend to create a simpler and more profess
 1. Download all resources in Proposal folder.
 2. Create accounts in Metamask using Ganache. 
 3. Deploy Token.sol and three Proposal.sol smart contracts through Remix (recommended to use one address for all deployment).
-4. Setup .env file with newly created smart contract addresses
-   SMART_CONTRACT_ADDRESS_1, SMART_CONTRACT_ADDRESS_2, SMART_CONTRACT_ADDRESS_3, are the variables for the proposal contract        addresses.
+4. Setup .env file with newly created smart contract addresses;
+   SMART_CONTRACT_ADDRESS_1, SMART_CONTRACT_ADDRESS_2, SMART_CONTRACT_ADDRESS_3 are the variables for the proposal contract        addresses.
    SMART_CONTRACT_ADDRESS_TOKEN is the variable for the Vote token address.
 5. Run streamlit interface.
 
