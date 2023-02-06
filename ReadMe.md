@@ -1,4 +1,4 @@
-# Project 3 - Group 3
+# DAO Proposal & Voting System
 
 ![DAO_image](Images/DAO.jpeg)
 
