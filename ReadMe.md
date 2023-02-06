@@ -93,6 +93,7 @@ We have finally come up to the most exciting part, its time to vote! As shown ab
 ### Languages / Tools / Resources Used:
 
 * Smart Contracts: Solidity using Remix IDE
+* Ganache: setup wallets & addresses
 * ABI (Application Binary Interface) file in JSON format
 * Metamask: interact with decentralized application
 * VS Code for Streamlit front-end
