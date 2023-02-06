@@ -1,6 +1,6 @@
 # Project 3 - Group 3
 
-![proj3_group3_final](Images/proj3_group3_final.png)
+![DAO_image](Images/DAO.jpeg)
 
 # The Team
 * Viktoria Osipova - Project Leader
