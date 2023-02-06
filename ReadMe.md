@@ -37,7 +37,7 @@ The project will consist of minting new ERC20 tokens on the Ethereum network, wh
   * Basic functionality: 1 token = 1 vote (only whole numbers of tokens can be sent)
   * Added features: Able to send multiple tokens to vote on selected proposal
 * Check total supply of each address
-Highest total supply of token in one of the proposal smart contracts wins.
+* Highest total supply of token in one of the proposal smart contracts wins.
 
 
 
