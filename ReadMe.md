@@ -24,47 +24,42 @@ Permits the execution of agreed upon decisions
 Allows members to put forth proposals for other members to vote on
 Is immutable
 
-This project aims to create an DAO application on the blockchain that allows users to submit new proposals for their organization, voting on said proposals, and execution of proposals. 
+This project aims to create an DAO application on the blockchain that allows proposals to be submitted with users voting on said proposals using an ERC20 token. 
 
 ### Methods
 
-The project will consist of minting new tokens on the Ethereum network, which will then be distributed to eligible candidates. These new tokens will be used for voting on proposals put forth by other eligible users by coin holders depositing their tokens into a polling wallet.
+The project will consist of minting new ERC20 tokens on the Ethereum network, which will then be distributed to eligible candidates. These tokens will be used for voting on proposals put forth by the head of the DAO.
 
-* Distribute ERC20 token “VoteCoin” to eligible users.
-* Setup proposal contract, whereby the contract deployer can make one proposal per contract that represents what you are voting on (can be seen via GetInfo() call) e.g. 3 addresses for 3 different devs to potentially hire (Streamlit frontend shows which address represents who) - store extended details of proposal on IPFS.
+* Distribute ERC20 token VOTE to eligible users.
+* Setup proposal contract, whereby the contract deployer can make one proposal per contract that represents what you are voting on (can be seen via GetInfo() call) e.g. 3 addresses for 3 different devs to potentially hire (Streamlit frontend shows which address represents who)
 
-* Voters send their token to who they want to vote for (tokens are restricted to being sent to the eligible addresses ie can’t be sent to random addresses.)
-  * Basic functionality: 1 token = 1 vote (only whole numbers of tokens can be sent - set decimals to 0)
+* Voters send their token to who they want to vote for
+  * Basic functionality: 1 token = 1 vote (only whole numbers of tokens can be sent)
   * Added features: Able to send multiple tokens to vote on selected proposal
 * Check total supply of each address
 Highest total supply of token in one of the proposal smart contracts wins.
 
-
-### Languages / Tools / Resources Used:
-
-* Smart Contracts: Solidity using Remix IDE
-* ABI (Application Binary Interface) file in JSON format
-* Metamask: interact with decentralized application
-* VS Code for Streamlit front-end
 
 
 ### Streamlit Frontend:
 
 We will be using Streamlit for our frontend to create a simpler and more professional interface that anyone of any skill level will be able to interact with.
 
-* Proposals
-* Selecting wallet
-* Checking if how many vote tokens the address holds
-* Receiving wallet address (smart contract where proposals are held)
-* Vote tally, everytime a vote is cast it automatically updates.
+* Minting tokens to addresses
+* Creating proposals
+* Voting on proposals using tokens
+* Tallying number of votes for each proposal
 
 
 ### Steps to run Onchain Voting
 
-1. Create accounts in Metamask using Ganache. 
-2. Deploy Token.sol and three Proposal.sol smart contracts through Remix (recommended to use one address for all deployment).
-3. Setup .env file with newly created smart contract addresses.
-4. Run streamlit interface.
+1. Download all resources in Proposal folder.
+2. Create accounts in Metamask using Ganache. 
+3. Deploy Token.sol and three Proposal.sol smart contracts through Remix (recommended to use one address for all deployment).
+4. Setup .env file with newly created smart contract addresses
+   SMART_CONTRACT_ADDRESS_1, SMART_CONTRACT_ADDRESS_2, SMART_CONTRACT_ADDRESS_3, are the variables for the proposal contract        addresses.
+   SMART_CONTRACT_ADDRESS_TOKEN is the variable for the Vote token address.
+5. Run streamlit interface.
 
 Now you can mint tokens, create proposals onchain and vote for the proposals you like.
 
@@ -91,6 +86,16 @@ Similarly, the proposal registry system can only be controlled by the smart cont
 ![voting](Images/Vote.gif)
 
 We have finally come up to the most exciting part, its time to vote! As shown above, the proposals are displayed again via the GetInfo() call function and the current vote tally is 0. This tally is obtained by calling the BalanceOf() call function of each smart contract which shows how many tokens have accumalated in each proposal contract. We can then select the accounts that hold tokens and vote with them. Input the desired amount of tokens you wish to vote with and click Vote for Proposal X. This then transfers the desired amount of tokens from the selected address to the selected Proposal contract via the transfer() function. The tally is then automatically updated with the new balances of tokens in each proposal contract.
+
+
+
+
+### Languages / Tools / Resources Used:
+
+* Smart Contracts: Solidity using Remix IDE
+* ABI (Application Binary Interface) file in JSON format
+* Metamask: interact with decentralized application
+* VS Code for Streamlit front-end
 
 
 
